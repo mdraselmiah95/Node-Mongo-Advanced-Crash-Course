@@ -17,11 +17,13 @@ let userData = [];
 
 for (let i = 0; i < userIds.length; i++) {
   const userId = userIds[i];
-  myPromise.then((user) => {
-    userData.push(user);
-  });
+  userData.push(myPromise);
 }
 
-console.log(userData);
+Promise.all(userData).then((user) => {
+  console.log(user);
+});
+
+// console.log(userData);
 
 myPromise.then((res) => console.log(res)).catch((err) => console.log(err));
