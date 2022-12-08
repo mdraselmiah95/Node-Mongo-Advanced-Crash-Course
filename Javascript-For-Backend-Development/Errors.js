@@ -1,3 +1,5 @@
+const { errorHandler, funk } = require("./errorHandler.js");
+
 async function getData() {
   try {
     // undefined.find();
@@ -9,18 +11,5 @@ async function getData() {
 }
 
 getData();
-
-function errorHandler(error) {
-  const { name, message, stack } = error;
-  console.log(name, message);
-
-  //   logger.error({
-  //     name,
-  //     message,
-  //     stack,
-  //   });
-  //   console.log("Internal Server Error.");
-}
-
+funk();
 console.log("DONE");
-//gdgd   the fun
