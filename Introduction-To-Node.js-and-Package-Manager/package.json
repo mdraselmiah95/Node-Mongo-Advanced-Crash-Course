@@ -2,9 +2,9 @@
   "name": "introduction-to-node.js-and-package-manager",
   "version": "1.0.0",
   "description": "Learning NodeJS",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "index.js nodemon"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +12,8 @@
   "dependencies": {
     "node": "^19.2.0",
     "underscore": "^1.13.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
