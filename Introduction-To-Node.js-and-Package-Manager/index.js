@@ -25,11 +25,12 @@ const other = require("./other");
 // console.log(res2);
 
 const http = require("http");
+const { stringify } = require("querystring");
 
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(`<p>This is Home page.</p>`);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.write(JSON.stringify({ course: "ACC" }));
     res.end();
   } else if (req.url === "/contact") {
     res.writeHead(200, { "Content-Type": "text/html" });

@@ -2,9 +2,9 @@
   "name": "introduction-to-node.js-and-package-manager",
   "version": "1.0.0",
   "description": "Learning NodeJS",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "index.js nodemon"
+    "start": "app.js nodemon"
   },
   "keywords": [],
   "author": "",
