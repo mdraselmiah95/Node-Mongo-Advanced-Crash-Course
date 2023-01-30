@@ -11,9 +11,9 @@ const dbConnect = require("./utils/dbConnect");
 const toolsRouters = require("./routes/v1/tools.route");
 
 app.use(cors());
-app.use(express.json()); //2-4 the how the
+app.use(express.json());
 
-dbConnect(); // Connect to the DataBase
+dbConnect(); // Connect to the DataBase  3.5
 
 app.use("/api/v1/tools", toolsRouters);
 
