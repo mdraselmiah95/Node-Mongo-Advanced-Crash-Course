@@ -9,11 +9,15 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const nodemailer = require("nodemailer");
 const dbConnect = require("./utils/dbConnect");
 const toolsRouters = require("./routes/v1/tools.route");
+const viewCount = require("./middleware/viewCount");
 
 app.use(cors());
 app.use(express.json());
 
-dbConnect(); // Connect to the DataBase  3.5
+// Middleware
+app.use(viewCount);
+
+dbConnect(); // Connect To The DataBase  3.5
 
 app.use("/api/v1/tools", toolsRouters);
 
