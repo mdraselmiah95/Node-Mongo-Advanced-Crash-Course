@@ -9,6 +9,10 @@ module.exports.saveATools = (req, res, next) => {
   res.send("Save A Tools.");
 };
 
+module.exports.getToolDetail = (req, res, next){
+  res.send("Tools Details Found.");
+}
+
 // module.exports = {
 //   getAllTools,
 // };
