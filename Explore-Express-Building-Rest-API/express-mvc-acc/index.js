@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+import rateLimit from "express-rate-limit";
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,8 +15,18 @@ const viewCount = require("./middleware/viewCount");
 app.use(cors());
 app.use(express.json());
 
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter);
+
 // Middleware
-app.use(viewCount);
+// app.use(viewCount);
 
 dbConnect(); // Connect To The DataBase  3.5
 
