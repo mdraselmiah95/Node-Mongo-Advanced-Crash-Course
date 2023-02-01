@@ -13,6 +13,7 @@ const viewCount = require("./middleware/viewCount");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 // Middleware
 // app.use(viewCount);
@@ -203,6 +204,7 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
+  res.sendFile(__dirname + "/public/test.html");
 });
 
 app.all("*", (req, res) => {
