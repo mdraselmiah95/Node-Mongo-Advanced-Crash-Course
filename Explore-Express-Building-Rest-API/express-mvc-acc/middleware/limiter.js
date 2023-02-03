@@ -11,5 +11,3 @@ const limiter = rateLimit({
 // app.use(limiter);
 
 module.exports = limiter;
-
-// This will everything
