@@ -67,12 +67,35 @@ const productSchema = mongoose.Schema(
     //     type: Date,
     //     default: Date.now,
     //   },
+    supplier: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Supplier",
+    },
+    catagories: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        _id: mongoose.Schema.Types.ObjectId,
+      },
+    ],
   },
   { timestamps: true }
 );
 
+//TODO: SCHEMA => MODEL => QUERY
+
+const Product = mongoose.model("Product", productSchema);
+
 app.get("/", (req, res) => {
   res.send("Route Is Working 🥈");
+});
+
+// Posting To Database
+
+app.post("/api/v1/product/", (req, res, next) => {
+  res.send("IT IS WORKING 🍷");
 });
 
 module.exports = app;
