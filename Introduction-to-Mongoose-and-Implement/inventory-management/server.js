@@ -4,8 +4,9 @@ const colors = require("colors");
 
 const app = require("./app");
 
+mongoose.set("strictQuery", false);
 // Database Connection
-mongoose.connect(process.env.DATABASE).then(() => {
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true }).then(() => {
   console.log(`Database Connection Is Successful 🥇`.rainbow.bold);
 });
 
