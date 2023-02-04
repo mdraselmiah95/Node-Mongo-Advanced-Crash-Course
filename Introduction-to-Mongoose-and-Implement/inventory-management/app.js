@@ -12,11 +12,11 @@ const productSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please Provide a Name for this Product"],
+      required: [true, "Please provide a name for this product."],
       trim: true,
-      unique: [true, "Name must be Unique"],
-      minLength: [3, "Name must be at least 3 characters"],
-      maxLength: [100, "Name is too Large"],
+      unique: [true, "Name must be unique"],
+      minLength: [3, "Name must be at least 3 characters."],
+      maxLength: [100, "Name is too large"],
     },
     description: {
       type: String,
@@ -25,20 +25,20 @@ const productSchema = mongoose.Schema(
     price: {
       type: Number,
       required: true,
-      min: [0, "Price can't be Negative"],
+      min: [0, "Price can't be negative"],
     },
     unit: {
       type: String,
       required: true,
       enum: {
-        values: ["kg", "liter", "pcs"],
-        message: "Unit value can't be {VALUE}, must be kg/liter/pcs",
+        values: ["kg", "litre", "pcs"],
+        message: "unit value can't be {VALUE}, must be kg/litre/pcs",
       },
     },
     quantity: {
       type: Number,
       required: true,
-      min: [0, "Quantity can't be Negative"],
+      min: [0, "quantity cant be negative"],
       validate: {
         validator: (value) => {
           const isInteger = Number.isInteger(value);
@@ -48,8 +48,8 @@ const productSchema = mongoose.Schema(
             return false;
           }
         },
-        message: "Quantity must be an Integer.",
       },
+      message: "Quantity must be an integer",
     },
     status: {
       type: String,
@@ -59,29 +59,29 @@ const productSchema = mongoose.Schema(
         message: "status can't be {VALUE}",
       },
     },
-    //   createdAt: {
-    //     type: Date,
-    //     default: Date.now,
+    // createdAt: {
+    //   type: Date,
+    //   default: Date.now,
+    // },
+    // updatedAt: {
+    //   type: Date,
+    //   default: Date.now
+    // }
+    // supplier: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Supplier"
+    // },
+    // categories: [{
+    //   name: {
+    //     type: String,
+    //     required: true
     //   },
-    //   updatedAt: {
-    //     type: Date,
-    //     default: Date.now,
-    //   },
-    supplier: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Supplier",
-    },
-    catagories: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        _id: mongoose.Schema.Types.ObjectId,
-      },
-    ],
+    //   _id: mongoose.Schema.Types.ObjectId
+    // }]
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 //TODO: SCHEMA => MODEL => QUERY
@@ -94,8 +94,23 @@ app.get("/", (req, res) => {
 
 // Posting To Database
 
-app.post("/api/v1/product/", (req, res, next) => {
-  res.send("IT IS WORKING 🍷");
+app.post("/api/v1/product/", async (req, res, next) => {
+  try {
+    const product = new Product(req.body);
+    const result = await product.save();
+
+    res.status(200).json({
+      status: "success",
+      message: "Data Inserted Successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Data is not inserted",
+      error: error.message,
+    });
+  }
 });
 
 module.exports = app;
