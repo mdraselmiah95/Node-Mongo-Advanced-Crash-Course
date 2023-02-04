@@ -96,8 +96,9 @@ app.get("/", (req, res) => {
 
 app.post("/api/v1/product/", async (req, res, next) => {
   try {
-    const product = new Product(req.body);
-    const result = await product.save();
+    const result = await Product.create(req.body);
+    // const product = new Product(req.body);
+    // const result = await product.save();
 
     res.status(200).json({
       status: "success",
