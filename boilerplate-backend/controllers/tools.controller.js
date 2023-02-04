@@ -64,9 +64,10 @@ module.exports.getToolDetail = async (req, res, next) => {
     const tool = await db.collection("tools").findOne({ _id: ObjectId(id) });
 
     if (!tool) {
-      return res
-        .status(400)
-        .json({ success: false, error: "Couldn't find a tool with this id" });
+      return res.status(400).json({
+        success: false,
+        error: "Couldn't find a tool with this id 💣",
+      });
     }
 
     res.status(200).json({ success: true, data: tool });
@@ -93,12 +94,12 @@ module.exports.updateTool = async (req, res, next) => {
     if (!tool.modifiedCount) {
       return res
         .status(400)
-        .json({ success: false, error: "Couldn't update the tool" });
+        .json({ success: false, error: "Couldn't update the tool 🗃️" });
     }
 
     res
       .status(200)
-      .json({ success: true, message: "Successfully updated the tool" });
+      .json({ success: true, message: "Successfully updated the tool ㊙️" });
   } catch (error) {
     next(error);
   }
@@ -120,12 +121,12 @@ module.exports.deleteTool = async (req, res, next) => {
     if (!tool.deletedCount) {
       return res
         .status(400)
-        .json({ success: false, error: "Couldn't delete the tool" });
+        .json({ success: false, error: "Couldn't delete the tool ⛔" });
     }
 
     res
       .status(200)
-      .json({ success: true, message: "Successfully deleted the tool" });
+      .json({ success: true, message: "Successfully deleted the tool 🌬️" });
   } catch (error) {
     next(error);
   }
@@ -137,6 +138,7 @@ module.exports.test = async (req, res, next) => {
     db.collection("test").insertOne({ name: `test ${i}`, age: i });
   }
 };
+
 module.exports.testGet = async (req, res, next) => {
   const db = getDb();
 
