@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const productSchema = mongoose.Schema(
+const Product = mongoose.Schema(
   {
     name: {
       type: String,
@@ -76,4 +76,4 @@ const productSchema = mongoose.Schema(
   }
 );
 
-module.exports = productSchema;
+module.exports = Product;
