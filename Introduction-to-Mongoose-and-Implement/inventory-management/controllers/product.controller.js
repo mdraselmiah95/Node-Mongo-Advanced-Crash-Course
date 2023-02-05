@@ -1,4 +1,7 @@
-const Product = require("../models/Product");
+const {
+  getProductService,
+  createProductService,
+} = require("../services/product.services");
 
 exports.getProducts = async (req, res, next) => {
   try {
@@ -9,12 +12,11 @@ exports.getProducts = async (req, res, next) => {
     //   .lt(600)
     //   .limit(2)
     //   .sort({ quantity: -1 });
-
-    const product = await Product.find({});
+    const products = await getProductService(req.query.limit);
 
     res.status(200).json({
       status: "successful",
-      data: product,
+      data: products,
     });
   } catch (error) {
     res.status(400).json({
@@ -27,11 +29,7 @@ exports.getProducts = async (req, res, next) => {
 
 exports.createProduct = async (req, res, next) => {
   try {
-    const result = await Product.create(req.body);
-    result.logger();
-    // const product = new Product(req.body);
-    // const result = await product.save();
-
+    const result = await createProductService(req.body);
     res.status(200).json({
       status: "success",
       message: "Data Inserted Successfully",
