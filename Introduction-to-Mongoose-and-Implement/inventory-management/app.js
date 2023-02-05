@@ -84,6 +84,26 @@ const productSchema = mongoose.Schema(
   }
 );
 
+// mongoose middleware for saving data: pre/post
+
+productSchema.pre("save", function (next) {
+  console.log("Before Saving Data");
+  if (this.quantity === 0) {
+    this.status = "out-of-stock";
+  }
+  next();
+});
+
+// productSchema.post("save", function (doc, next) {
+//   console.log("After Saving Data");
+
+//   next();
+// });
+
+productSchema.methods.logger = function () {
+  console.log(`Data Save For ${this.name}`);
+};
+
 //TODO: SCHEMA => MODEL => QUERY
 
 const Product = mongoose.model("Product", productSchema);
@@ -97,6 +117,7 @@ app.get("/", (req, res) => {
 app.post("/api/v1/product/", async (req, res, next) => {
   try {
     const result = await Product.create(req.body);
+    result.logger();
     // const product = new Product(req.body);
     // const result = await product.save();
 
@@ -109,6 +130,22 @@ app.post("/api/v1/product/", async (req, res, next) => {
     res.status(400).json({
       status: "fail",
       message: "Data is not inserted",
+      error: error.message,
+    });
+  }
+});
+
+app.get("/api/v1/product", async (req, res, next) => {
+  try {
+    const product = await Product.find({});
+    res.status(200).json({
+      status: "successful",
+      data: product,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Can't get the Data",
       error: error.message,
     });
   }
