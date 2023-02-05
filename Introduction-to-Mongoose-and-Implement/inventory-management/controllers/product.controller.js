@@ -10,7 +10,7 @@ exports.getProducts = async (req, res, next) => {
     //   .limit(2)
     //   .sort({ quantity: -1 });
 
-    const product = await Product.findById(undefined);
+    const product = await Product.find({});
 
     res.status(200).json({
       status: "successful",
