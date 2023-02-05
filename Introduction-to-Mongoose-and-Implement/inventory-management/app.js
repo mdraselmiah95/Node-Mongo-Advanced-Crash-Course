@@ -138,11 +138,12 @@ app.post("/api/v1/product/", async (req, res, next) => {
 app.get("/api/v1/product", async (req, res, next) => {
   try {
     const product = await Product.where("name")
-      .equals(/|w/)
+      .equals("Battery")
       .where("quantity")
-      .gt(100)
+      .gte(10)
       .lt(600)
-      .limit(2);
+      .limit(2)
+      .sort({ quantity: -1 });
     res.status(200).json({
       status: "successful",
       data: product,
