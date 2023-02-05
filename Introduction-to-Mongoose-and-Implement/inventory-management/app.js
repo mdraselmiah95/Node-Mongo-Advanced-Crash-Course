@@ -138,7 +138,7 @@ app.post("/api/v1/product/", async (req, res, next) => {
 app.get("/api/v1/product", async (req, res, next) => {
   try {
     const product = await Product.find({
-      status: { $ne: "in-stock" },
+      name: { $in: ["Rice", "Mobile"] },
     });
     res.status(200).json({
       status: "successful",
