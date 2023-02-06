@@ -24,3 +24,11 @@ exports.updateProductService = async (productId, data) => {
   // const result = await product.set(data).save();
   return result;
 };
+
+exports.bulkUpdateProductService = async (data) => {
+  console.log(data.data, data.ids);
+  const result = await Product.updateMany({ _id: data.ids }, data.data, {
+    runValidators: true,
+  });
+  return result;
+};

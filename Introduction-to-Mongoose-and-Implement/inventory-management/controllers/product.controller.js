@@ -2,6 +2,7 @@ const {
   getProductService,
   createProductService,
   updateProductService,
+  bulkUpdateProductService,
 } = require("../services/product.services");
 
 exports.getProducts = async (req, res, next) => {
@@ -65,8 +66,8 @@ exports.updateProduct = async (req, res, next) => {
 
 exports.bulkUpdateProduct = async (req, res, next) => {
   try {
-    const { id } = await req.params;
-    const result = await updateProductService(id, req.body);
+    console.log(req.body);
+    const result = await bulkUpdateProductService(req.body);
 
     res.status(200).json({
       status: "success",
@@ -81,4 +82,4 @@ exports.bulkUpdateProduct = async (req, res, next) => {
   }
 };
 
-// Testing the code the code finally
+// Testing the code the code
