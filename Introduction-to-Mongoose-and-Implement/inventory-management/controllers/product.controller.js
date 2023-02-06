@@ -62,4 +62,23 @@ exports.updateProduct = async (req, res, next) => {
     });
   }
 };
+
+exports.bulkUpdateProduct = async (req, res, next) => {
+  try {
+    const { id } = await req.params;
+    const result = await updateProductService(id, req.body);
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully Updated the Product 🥈",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Couldn't not update the product.",
+      error: error.message,
+    });
+  }
+};
+
 // Testing the code the code finally
