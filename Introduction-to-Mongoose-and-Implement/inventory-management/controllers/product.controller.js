@@ -1,6 +1,7 @@
 const {
   getProductService,
   createProductService,
+  updateProductService,
 } = require("../services/product.services");
 
 exports.getProducts = async (req, res, next) => {
@@ -46,6 +47,13 @@ exports.createProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {
   try {
+    const { id } = await req.params;
+    const result = await updateProductService(id, req.body);
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully Updated the Product 🥈",
+    });
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -54,3 +62,4 @@ exports.updateProduct = async (req, res, next) => {
     });
   }
 };
+// Testing the code the code finally

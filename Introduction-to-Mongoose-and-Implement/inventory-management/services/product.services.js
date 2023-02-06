@@ -13,4 +13,11 @@ exports.createProductService = async (data) => {
   return product;
 };
 
-// This is make many
+exports.updateProductService = async (productId, data) => {
+  const result = await Product.updateOne(
+    { _id: productId },
+    { $set: data },
+    { runValidators: true }
+  );
+  return result;
+};
