@@ -3,6 +3,7 @@ const {
   createProductService,
   updateProductService,
   bulkUpdateProductService,
+  deleteProductByIdService,
 } = require("../services/product.services");
 
 exports.getProducts = async (req, res, next) => {
@@ -46,7 +47,7 @@ exports.createProduct = async (req, res, next) => {
   }
 };
 
-exports.updateProduct = async (req, res, next) => {
+exports.updateProductById = async (req, res, next) => {
   try {
     const { id } = await req.params;
     const result = await updateProductService(id, req.body);
@@ -76,6 +77,24 @@ exports.bulkUpdateProduct = async (req, res, next) => {
     res.status(400).json({
       status: "fail",
       message: "Couldn't not update the product.",
+      error: error.message,
+    });
+  }
+};
+
+exports.deleteProductById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await deleteProductByIdService(id);
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully Deleted the Product 🥈",
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "Couldn't not Deleted the product.",
       error: error.message,
     });
   }

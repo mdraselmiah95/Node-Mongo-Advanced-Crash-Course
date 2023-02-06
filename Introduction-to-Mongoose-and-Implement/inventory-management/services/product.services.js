@@ -26,11 +26,22 @@ exports.updateProductService = async (productId, data) => {
 };
 
 exports.bulkUpdateProductService = async (data) => {
-  console.log(data.data, data.ids);
-  const result = await Product.updateMany({ _id: data.ids }, data.data, {
-    runValidators: true,
+  // const result = await Product.updateMany({ _id: data.ids }, data.data, {
+  //   runValidators: true,
+  // });
+
+  const products = [];
+  data.ids.forEach((product) => {
+    products.push(Product.updateOne({ _id: product.id }, product.data));
   });
+  const result = await Promise.all(products);
+  console.log(result);
   return result;
 };
 
-// This will make many difference
+exports.deleteProductByIdService = async (id) => {
+  const result = await Product.deleteOne({ _id: id });
+  return result;
+};
+
+// This will is the will
