@@ -88,6 +88,12 @@ exports.deleteProductById = async (req, res, next) => {
     const { id } = req.params;
     const result = await deleteProductByIdService(id);
 
+    if (!result.deletedCount) {
+      return res.status(400).json({
+        status: "fail",
+        error: "Could't delete the product",
+      });
+    }
     res.status(200).json({
       status: "success",
       message: "Successfully Deleted the Product 🥈",
@@ -117,5 +123,3 @@ exports.bulkDeleteProduct = async (req, res, next) => {
     });
   }
 };
-
-// Testing the code the code
