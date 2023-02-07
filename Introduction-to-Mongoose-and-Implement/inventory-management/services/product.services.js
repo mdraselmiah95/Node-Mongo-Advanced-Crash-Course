@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 
-exports.getProductService = async (limit) => {
-  const product = await Product.find({}).limit(100);
+exports.getProductService = async () => {
+  const product = await Product.find({});
   return product;
 };
 
@@ -45,8 +45,6 @@ exports.deleteProductByIdService = async (id) => {
 };
 
 exports.bulkDeleteProductService = async (ids) => {
-  const result = await Product.deleteMany({ _id: ids });
+  const result = await Product.deleteMany({});
   return result;
 };
-
-// This will is the will
