@@ -6,8 +6,9 @@ exports.getProductService = async (filters, queries) => {
     .limit(queries.limit)
     .select(queries.fields)
     .sort(queries.sortBy);
-  const totalProducts = await Product.countDocuments(filters);
-  return { totalProducts, products };
+  const total = await Product.countDocuments(filters);
+  const page = Math.ceil(total / queries.limit);
+  return { total, page, products };
 };
 
 exports.createProductService = async (data) => {

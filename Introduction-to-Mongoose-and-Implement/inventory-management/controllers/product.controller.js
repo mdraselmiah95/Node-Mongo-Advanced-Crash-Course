@@ -39,7 +39,7 @@ exports.getProducts = async (req, res, next) => {
       queries.fields = fields;
       console.log(fields);
     }
-
+    // this the code the code vim the well
     if (req.query.page) {
       /**
        * 50 Products
