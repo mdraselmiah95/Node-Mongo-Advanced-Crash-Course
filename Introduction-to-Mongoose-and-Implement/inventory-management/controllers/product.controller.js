@@ -10,9 +10,8 @@ const {
 exports.getProducts = async (req, res, next) => {
   try {
     // { price: { $gt:50 }}
-    console.log(req.query);
 
-    const filters = { ...req.query };
+    let filters = { ...req.query };
 
     // sort, page, limit => exclude
     const excludeFields = ["sort", "page", "limit"];
@@ -21,10 +20,11 @@ exports.getProducts = async (req, res, next) => {
     // TODO: gt, lt, gte, lte
     let filtersString = JSON.stringify(filters);
     filtersString = filtersString.replace(
-      /\b(gt||gte||lt||lte)\b/g,
+      /\b(gt|gte|lt|lte)\b/g,
       (match) => `$${match}`
     );
-    console.log(filtersString);
+
+    filters = JSON.parse(filtersString);
 
     const queries = {};
     if (req.query.sort) {
@@ -38,6 +38,18 @@ exports.getProducts = async (req, res, next) => {
       const fields = req.query.fields.split(",").join(" ");
       queries.fields = fields;
       console.log(fields);
+    }
+
+    if (req.query.page) {
+      /**
+       * 50 Products
+       * each page 10 product
+       * page 1--> 1-10
+       * page 2--> 2-20
+       * page 3--> 21-30     --> page 3  -> skip 1-20  -> 3-1 ->2 *10
+       * page 4--> 31-40      ---> page 4 --> 1-30  --> 4-1  -->3*10
+       * page 5--> 41-50
+       */
     }
 
     const products = await getProductService(filters, queries);
