@@ -9,7 +9,7 @@ const {
 
 exports.getProducts = async (req, res, next) => {
   try {
-    // { price: { $gt:50 }}
+    // { price: { $gt:50 }} [gt]=50
 
     let filters = { ...req.query };
 
@@ -50,7 +50,7 @@ exports.getProducts = async (req, res, next) => {
        * page 4--> 31-40      ---> page 4 --> 1-30  --> 4-1  -->3*10
        * page 5--> 41-50
        */
-      const { page = 0, limit = 10 } = req.query;
+      const { page = 1, limit = 10 } = req.query;
       const skip = (page - 1) * parseInt(limit);
       queries.skip = skip;
       queries.limit = parseInt(limit);
