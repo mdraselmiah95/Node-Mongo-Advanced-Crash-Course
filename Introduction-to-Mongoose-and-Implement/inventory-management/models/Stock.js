@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
-const productSchema = mongoose.Schema(
+
+const stockSchema = mongoose.Schema(
   {
+    productId: {
+      type: ObjectId,
+      required: true,
+      ref: "Product",
+    },
     name: {
       type: String,
       required: [true, "Please provide a name for this product."],
@@ -44,6 +50,16 @@ const productSchema = mongoose.Schema(
         },
       },
     ],
+    price: {
+      type: Number,
+      required: true,
+      minLength: [0, "Product Price can't be Negative"],
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      minLength: [0, "Product Quantity can't be Negative"],
+    },
     category: {
       type: String,
       required: true,
@@ -59,22 +75,47 @@ const productSchema = mongoose.Schema(
         required: true,
       },
     },
+    status: {
+      type: String,
+      required: true,
+      enum: {
+        values: ["in-stock", "out-of-stock", "discontinued"],
+        message: "Status can't be {VALUE}",
+      },
+    },
+    store: {
+      name: {
+        type: String,
+        required: [true, "Please provide a name for this product."],
+        trim: true,
+        unique: [true, "Name must be unique"],
+        lowercase: true,
+        minLength: [3, "Name must be at least 3 characters."],
+        maxLength: [100, "Name is too large"],
+      },
+      id: {
+        type: ObjectId,
+        required: true,
+        ref: "Store",
+      },
+    },
+    suppliedBy: {
+      name: {
+        type: String,
+        required: [true, "Please provide a Supplier Name."],
+        trim: true,
+      },
+      id: {
+        type: ObjectId,
+        ref: "Supplier",
+      },
+    },
   },
   {
     timestamps: true,
   }
 );
 
-// productSchema.pre("save", function (next) {
-//   this ->
-//   console.log(" Before saving data");
-//   if (this.quantity == 0) {
-//     this.status = "out-of-stock";
-//   }
+const Stock = mongoose.model("Stock", stockSchema);
 
-//   next();
-// });
-
-const Product = mongoose.model("Product", productSchema);
-
-module.exports = Product;
+module.exports = Stock;
