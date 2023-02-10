@@ -24,4 +24,4 @@ app.use("/api/v1/brand", brandRoute);
 
 module.exports = app;
 
-// video=>05 the will come to the top
+// video=>05
