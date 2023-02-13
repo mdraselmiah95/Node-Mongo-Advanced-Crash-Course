@@ -24,4 +24,4 @@ app.use("/api/v1/brand", brandRoute);
 
 module.exports = app;
 
-// video=>05 the are gone you the
+// video=>05 the are gone
