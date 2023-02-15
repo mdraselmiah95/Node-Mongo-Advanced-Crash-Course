@@ -1,9 +1,7 @@
 const express = require("express");
-const multer = require("multer");
 const router = express.Router();
 const productController = require("../controllers/product.controller");
-
-const uploader = multer({ dest: "images/" });
+const uploader = require("../middleware/uploader");
 
 router.post(
   "/file-upload",
