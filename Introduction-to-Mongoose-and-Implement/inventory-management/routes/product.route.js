@@ -5,9 +5,15 @@ const uploader = require("../middleware/uploader");
 
 router.post(
   "/file-upload",
-  uploader.single("image"),
+  uploader.array("image"),
   productController.fileUpload
 );
+
+{
+  /* <input type="file" name="image" /> */
+}
+// const formData = new FormData();
+// formData.append("image", forData);
 
 router.route("/bulk-update").patch(productController.bulkUpdateProduct);
 router.route("/bulk-delete").delete(productController.bulkDeleteProduct);
