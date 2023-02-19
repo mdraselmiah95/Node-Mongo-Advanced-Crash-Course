@@ -79,7 +79,7 @@ const supplierSchema = mongoose.Schema(
           "rangpur",
           "mymensingh",
         ],
-        message: "{VALUE} is not  acorrect division!",
+        message: "{VALUE} is not  correct division!",
       },
     },
     imageURL: {
