@@ -10,9 +10,9 @@ router
   .get(stockController.getStocks)
   .post(stockController.createStock);
 
-router
-  .route("/:id")
-  .patch(stockController.updateStockById)
-  .delete(stockController.deleteStockById);
+// router
+//   .route("/:id")
+//   .patch(stockController.updateStockById)
+//   .delete(stockController.deleteStockById);
 
 module.exports = router;
