@@ -17,6 +17,23 @@
     "status": "active"
   },
   {
+    "name": "Mezbaul Abedin Persian2",
+    "email": "mezba.pran2@test.com",
+    "brand": {
+      "name": "Pran",
+      "id": "63e524f88a6262593830d8cc"
+    },
+    "contactNumber": ["01111111111", "02222222222"],
+    "emergencyContactNumber": "011111111",
+    "tradeLicenceNumber": 1111111111,
+    "presentAddress": "944 Honduras Street",
+    "permanentAddress": "944 Ghana Street",
+    "location": "Dhaka",
+    "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "status": "active"
+  },
+  {
     "name": "Abdullah Al Fahim",
     "email": "fahim.teer@test.com",
     "brand": {
@@ -29,6 +46,23 @@
     "presentAddress": "944 Uganda Street",
     "permanentAddress": "944 Ghana Street",
     "location": "dhaka",
+    "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "status": "active"
+  },
+  {
+    "name": "Abdullah Al Fahim2",
+    "email": "fahim.teer2@test.com",
+    "brand": {
+      "name": "ACI",
+      "id": "63e524f88a6262593830d8c9"
+    },
+    "contactNumber": ["01111111111", "02222222222"],
+    "emergencyContactNumber": "011111111",
+    "tradeLicenceNumber": 1111111111,
+    "presentAddress": "944 Uganda Street",
+    "permanentAddress": "944 Ghana Street",
+    "location": "chattogram",
     "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
     "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
     "status": "active"
@@ -51,11 +85,79 @@
     "status": "active"
   },
   {
+    "name": "Jhankar Mahbub2",
+    "email": "jhankar.rupchanda2@test.com",
+    "brand": {
+      "name": "Rupchanada",
+      "id": "63e524f88a6262593830d8cb"
+    },
+    "contactNumber": ["01111111111", "02222222222"],
+    "emergencyContactNumber": "011111111",
+    "tradeLicenceNumber": 1111111111,
+    "presentAddress": "944 Honduras Street",
+    "permanentAddress": "944 Ghana Street",
+    "location": "chattogram",
+    "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "status": "active"
+  },
+  {
     "name": "Rasel Ahmed",
     "email": "rasel.fresh@test.com",
     "brand": {
       "name": "Fresh",
       "id": "63e524f88a6262593830d8ca"
+    },
+    "contactNumber": ["01111111111", "02222222222"],
+    "emergencyContactNumber": "011111111",
+    "tradeLicenceNumber": 1111111111,
+    "presentAddress": "944 Honduras Street",
+    "permanentAddress": "944 Ghana Street",
+    "location": "chattogram",
+    "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "status": "active"
+  },
+  {
+    "name": "Rasel Ahmed2",
+    "email": "rasel.fresh2@test.com",
+    "brand": {
+      "name": "Fresh",
+      "id": "63e524f88a6262593830d8ca"
+    },
+    "contactNumber": ["01111111111", "02222222222"],
+    "emergencyContactNumber": "011111111",
+    "tradeLicenceNumber": 1111111111,
+    "presentAddress": "944 Honduras Street",
+    "permanentAddress": "944 Ghana Street",
+    "location": "dhaka",
+    "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "status": "active"
+  },
+  {
+    "name": "Md.Rasel mia",
+    "email": "rasel.teer@test.com",
+    "brand": {
+      "name": "Teer",
+      "id": "63fccd65fae02b63b40ba916"
+    },
+    "contactNumber": ["01111111111", "02222222222"],
+    "emergencyContactNumber": "011111111",
+    "tradeLicenceNumber": 1111111111,
+    "presentAddress": "944 Honduras Street",
+    "permanentAddress": "944 Ghana Street",
+    "location": "chattogram",
+    "imageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "nationalIdImageURL": "https://i.ibb.co/WnFSs9Y/unnamed.webp",
+    "status": "active"
+  },
+  {
+    "name": "Md.Rasel mia2",
+    "email": "rasel.teer2@test.com",
+    "brand": {
+      "name": "Teer",
+      "id": "63fccd65fae02b63b40ba916"
     },
     "contactNumber": ["01111111111", "02222222222"],
     "emergencyContactNumber": "011111111",
