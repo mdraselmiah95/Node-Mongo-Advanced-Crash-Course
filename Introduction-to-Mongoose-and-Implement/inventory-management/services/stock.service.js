@@ -3,11 +3,16 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
 exports.getStockService = async (filters, queries) => {
-  const stocks = await Stock.find(filters)
-    .skip(queries.skip)
-    .limit(queries.limit)
-    .select(queries.fields)
-    .sort(queries.sortBy);
+  // const stocks = await Stock.find(filters)
+  //   .skip(queries.skip)
+  //   .limit(queries.limit)
+  //   .select(queries.fields)
+  //   .sort(queries.sortBy);
+
+  const stocks = await Stock.aggregate([
+    { $match: { "store.name": "chattogram" } },
+  ]);
+
   const total = await Stock.countDocuments(filters);
   const page = Math.ceil(total / queries.limit);
   return { total, page, stocks };
@@ -26,24 +31,24 @@ exports.getStockByIdService = async (id) => {
   const stock = await Stock.aggregate([
     //stage1
     { $match: { _id: ObjectId(id) } },
-    {
-      $project: {
-        name: 1,
-        category: 1,
-        price: 1,
-        productId: 1,
-        quantity: 1,
-        "brand.name": 1,
-      },
-    },
-    {
-      $lookup: {
-        from: "brands",
-        localField: "brand.name",
-        foreignField: "name",
-        as: "brandDetails",
-      },
-    },
+    // {
+    //   $project: {
+    //     name: 1,
+    //     category: 1,
+    //     price: 1,
+    //     productId: 1,
+    //     quantity: 1,
+    //     "brand.name": 1,
+    //   },
+    // },
+    // {
+    //   $lookup: {
+    //     from: "brands",
+    //     localField: "brand.name",
+    //     foreignField: "name",
+    //     as: "brandDetails",
+    //   },
+    // },
   ]);
 
   return stock;
