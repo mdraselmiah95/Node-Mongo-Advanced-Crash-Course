@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
+// schema design
 const validator = require("validator");
 
 const stockSchema = mongoose.Schema(
@@ -21,6 +22,7 @@ const stockSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
     unit: {
       type: String,
       required: true,
@@ -29,22 +31,23 @@ const stockSchema = mongoose.Schema(
         message: "unit value can't be {VALUE}, must be kg/litre/pcs/bag",
       },
     },
-    imageUrls: [
+
+    imageURLs: [
       {
         type: String,
         required: true,
-        validate: [validator.isURL, "Please provide a valid URL"],
+        validate: [validator.isURL, "Please provide valid url(s)"],
       },
     ],
     price: {
       type: Number,
       required: true,
-      minLength: [0, "Product Price can't be Negative"],
+      min: [0, "Product price can't be negative"],
     },
     quantity: {
       type: Number,
       required: true,
-      minLength: [0, "Product Quantity can't be Negative"],
+      min: [0, "Product quantity can't be negative"],
     },
     category: {
       type: String,
@@ -66,18 +69,28 @@ const stockSchema = mongoose.Schema(
       required: true,
       enum: {
         values: ["in-stock", "out-of-stock", "discontinued"],
-        message: "Status can't be {VALUE}",
+        message: " status can't be {VALUE} ",
       },
     },
     store: {
       name: {
         type: String,
-        required: [true, "Please provide a name for this product."],
         trim: true,
-        unique: [true, "Name must be unique"],
+        required: [true, "Please provide a store name"],
         lowercase: true,
-        minLength: [3, "Name must be at least 3 characters."],
-        maxLength: [100, "Name is too large"],
+        enum: {
+          values: [
+            "dhaka",
+            "chattogram",
+            "rajshahi",
+            "sylhet",
+            "khulna",
+            "barishal",
+            "rangpur",
+            "mymensingh",
+          ],
+          message: "{VALUE} is not a valid name",
+        },
       },
       id: {
         type: ObjectId,
@@ -88,14 +101,15 @@ const stockSchema = mongoose.Schema(
     suppliedBy: {
       name: {
         type: String,
-        required: [true, "Please provide a Supplier Name."],
         trim: true,
+        required: [true, "Please provide a supplier name"],
       },
       id: {
         type: ObjectId,
         ref: "Supplier",
       },
     },
+
     sellCount: {
       type: Number,
       default: 0,

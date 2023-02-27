@@ -10,7 +10,7 @@ router
   .get(stockController.getStocks)
   .post(stockController.createStock);
 
-router.get(stockController.getStockById);
+router.route("/:id").get(stockController.getStockById);
 //   .patch(stockController.updateStockById)
 //   .delete(stockController.deleteStockById);
 
