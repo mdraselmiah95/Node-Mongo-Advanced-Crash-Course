@@ -11,6 +11,14 @@ exports.getStockService = async (filters, queries) => {
   return { total, page, stocks };
 };
 
+exports.getStockByIdService = async (id) => {
+  const stock = await Stock.findOne({ _id: id })
+    .populate("store.id")
+    .populate("suppliedBy.id")
+    .populate("brand.id");
+  return stock;
+};
+
 exports.createStockService = async (data) => {
   if (data.quantity === 0) {
     data.status = "out-of-stock";
