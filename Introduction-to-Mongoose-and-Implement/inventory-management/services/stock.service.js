@@ -10,7 +10,20 @@ exports.getStockService = async (filters, queries) => {
   //   .sort(queries.sortBy);
 
   const stocks = await Stock.aggregate([
-    { $match: { "store.name": "chattogram" } },
+    { $match: {} },
+    {
+      $project: {
+        store: 1,
+        price: { $convert: { input: "$price", to: "int" } },
+        quantity: 1,
+      },
+    },
+    {
+      $group: {
+        _id: "$store.name",
+        totalProductPrice: { $sum: { $multiply: ["$price", "$quantity"] } },
+      },
+    },
   ]);
 
   const total = await Stock.countDocuments(filters);
