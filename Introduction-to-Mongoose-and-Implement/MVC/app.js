@@ -3,14 +3,12 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-//middlewares
+//middleware
 app.use(express.json());
 app.use(cors());
 
-
 //routes
-const productRoute= require('./routes/product.route')
-
+const productRoute = require("./routes/product.route");
 
 app.get("/", (req, res) => {
   res.send("Route is working! YaY!");
@@ -18,10 +16,8 @@ app.get("/", (req, res) => {
 
 // posting to database
 
-app.use('/api/v1/product',productRoute )
+app.use("/api/v1/product", productRoute);
 
 module.exports = app;
 
-
-
-
+// This is good the will
