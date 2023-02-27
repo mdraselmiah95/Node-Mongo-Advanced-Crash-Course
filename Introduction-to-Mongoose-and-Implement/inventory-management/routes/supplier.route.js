@@ -9,7 +9,7 @@ router
 
 router
   .route("/:id")
-  .get(supplierController.getSupplierId)
+  .get(supplierController.getSupplierById)
   .patch(supplierController.updateSupplier);
 
 module.exports = router;
