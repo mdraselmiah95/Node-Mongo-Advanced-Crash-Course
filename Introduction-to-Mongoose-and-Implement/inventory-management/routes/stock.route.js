@@ -7,12 +7,12 @@ const stockController = require("../controllers/stock.controller");
 
 router
   .route("/")
-  .get(productController.getStocks)
-  .post(productController.createStock);
+  .get(stockController.getStocks)
+  .post(stockController.createStock);
 
 router
   .route("/:id")
-  .patch(productController.updateStockById)
-  .delete(productController.deleteStockById);
+  .patch(stockController.updateStockById)
+  .delete(stockController.deleteStockById);
 
 module.exports = router;
