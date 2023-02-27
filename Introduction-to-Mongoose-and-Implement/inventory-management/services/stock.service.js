@@ -15,27 +15,21 @@ exports.createStockService = async (data) => {
   if (data.quantity === 0) {
     data.status = "out-of-stock";
   }
-  const product = await Stock.create(data);
-  const { _id: productId, brand } = product;
-  const result = await Brand.updateOne(
-    { _id: brand.id },
-    { $push: { products: productId } }
-  );
-  console.log(result);
-  return product;
+  const stock = await Stock.create(data);
+  return stock;
 };
 
-exports.updateProductService = async (productId, data) => {
-  const result = await Product.updateOne(
-    { _id: productId },
-    { $inc: data },
-    { runValidators: true }
-  );
+// exports.updateProductService = async (productId, data) => {
+//   const result = await Product.updateOne(
+//     { _id: productId },
+//     { $inc: data },
+//     { runValidators: true }
+//   );
 
-  return result;
-};
+//   return result;
+// };
 
-exports.deleteStockByIdService = async (id) => {
-  const result = await Product.deleteOne({ _id: id });
-  return result;
-};
+// exports.deleteStockByIdService = async (id) => {
+//   const result = await Product.deleteOne({ _id: id });
+//   return result;
+// };
