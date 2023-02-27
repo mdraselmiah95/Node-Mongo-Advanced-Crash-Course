@@ -1,4 +1,6 @@
 const Stock = require("../models/Stock");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.getStockService = async (filters, queries) => {
   const stocks = await Stock.find(filters)
@@ -12,10 +14,20 @@ exports.getStockService = async (filters, queries) => {
 };
 
 exports.getStockByIdService = async (id) => {
-  const stock = await Stock.findOne({ _id: id })
-    // .populate("store.id")
-    .populate("suppliedBy.id")
-    .populate("brand.id");
+  // const stock = await Stock.findOne({ _id: id })
+  //   .populate("store.id")
+  //   .populate("suppliedBy.id")
+  //   .populate("brand.id");
+
+  //TODO: Aggression pipe line=> many stages
+  // TODO: Data=> one stage => two stage
+  // TODO: name,age contactNo => contactNo
+
+  const stock = await Stock.aggregate([
+    //stage1
+    { $match: { _id: ObjectId(id) } },
+  ]);
+
   return stock;
 };
 

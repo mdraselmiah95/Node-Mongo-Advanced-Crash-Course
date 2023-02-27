@@ -31,5 +31,3 @@ app.use("/api/v1/supplier", supplierRoute);
 app.use("/api/v1/stock", stockRoute);
 
 module.exports = app;
-
-// video=>10.03=>22.57 the are
