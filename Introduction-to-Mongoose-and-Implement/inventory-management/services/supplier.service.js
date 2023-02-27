@@ -6,7 +6,7 @@ exports.createSupplierService = async (data) => {
 };
 
 exports.getSupplierService = async () => {
-  const suppliers = await Supplier.find({}).populate("products");
+  const suppliers = await Supplier.find({});
   return suppliers;
 };
 
