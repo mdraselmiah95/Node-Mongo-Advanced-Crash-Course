@@ -20,11 +20,52 @@ app.use(express.json());
  * GET -/       -find all the players
  * POST -/      -create a new and save into DB
  * GET -/:id    -find a single player by id
- * PUT -/:id    -update or create a player
- * PATCH -/:id  -update player
+ * PUT -/:id    -update or create a player (single update)
+ * PATCH -/:id  -update player (full update)
  * DELETE -/:id -delete a player from DB
  *
  */
+
+app.put("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const data = await fs.readFile(dbLocation);
+  const players = JSON.parse(data);
+  let player = players.find((item) => item.id === id);
+
+  if (!player) {
+    player = {
+      ...req.body,
+      id: shortid.generate(),
+    };
+    players.push(player);
+  } else {
+    player = {
+      id: player.id,
+      ...req.body,
+    };
+  }
+  await fs.writeFile(dbLocation, JSON.stringify(players));
+});
+
+app.patch("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const data = await fs.readFile(dbLocation);
+  const players = JSON.parse(data);
+  const player = players.find((item) => item.id === id);
+
+  if (!player) {
+    return res.status(404).json({ message: "Player Not Found" });
+  }
+
+  player.name = req.body.name || player.name;
+  player.country = req.body.country || player.country;
+  player.rank = req.body.rank || player.rank;
+
+  await fs.writeFile(dbLocation, JSON.stringify(players));
+  res.status(200).json(player);
+});
 
 app.get("/:id", async (req, res) => {
   const id = req.params.id;
