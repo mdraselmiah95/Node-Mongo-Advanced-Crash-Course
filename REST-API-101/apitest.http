@@ -51,7 +51,16 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:4000/1h6sS7sVz
+Content-Type: application/json
 
+{
+    "name":"Anamul Haque",
+    "country": "BD",
+    "rank": 14
+}
+
+###
 
 PUT http://localhost:4000/1h6sS7mVz
 Content-Type: application/json
