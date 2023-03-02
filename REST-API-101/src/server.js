@@ -8,6 +8,20 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
+/**
+ * Player Microservice
+ *
+ * CRUD ==> Create, Read, Update, Delete
+ *
+ * GET -/    -find all the players
+ * POST -/   -create a new and save into DB
+ * GET -/:id    -find a single player by id
+ * PUT -/:id    -update or create a player
+ * PATCH -/:id  -update player
+ * DELETE -/:id -delete a player from DB
+ *
+ */
+
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK" });
 });
