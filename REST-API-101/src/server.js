@@ -26,6 +26,22 @@ app.use(express.json());
  *
  */
 
+app.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const data = await fs.readFile(dbLocation);
+  const players = JSON.parse(data);
+  const player = players.find((item) => item.id === id);
+
+  if (!player) {
+    return res.status(404).json({ message: "Player Not Found" });
+  }
+
+  const newPlayers = players.filter((item) => item.id !== id);
+  await fs.writeFile(dbLocation, JSON.stringify(newPlayers));
+  res.status(203).send();
+});
+
 app.put("/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -40,12 +56,12 @@ app.put("/:id", async (req, res) => {
     };
     players.push(player);
   } else {
-    player = {
-      id: player.id,
-      ...req.body,
-    };
+    player.name = req.body.name;
+    player.country = req.body.country;
+    player.rank = req.body.rank;
   }
   await fs.writeFile(dbLocation, JSON.stringify(players));
+  res.status(200).json(player);
 });
 
 app.patch("/:id", async (req, res) => {
