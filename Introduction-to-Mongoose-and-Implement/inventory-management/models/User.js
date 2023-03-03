@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
-
-const bcrypt = require("bcryptjs");
-
+const crypto = require("crypto");
 const userSchema = mongoose.Schema(
   {
     email: {
@@ -76,7 +74,7 @@ const userSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      default: "inactive",
+      default: "active",
       enum: ["active", "inactive", "blocked"],
     },
 
