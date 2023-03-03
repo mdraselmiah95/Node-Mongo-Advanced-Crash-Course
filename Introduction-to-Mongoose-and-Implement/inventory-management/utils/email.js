@@ -71,7 +71,7 @@ module.exports.sendMailWithMailGun = async (data) => {
 // const mailgun = new Mailgun(formData);
 // const mg = mailgun.client({
 // 	username: 'api',
-// 	key: 'a07f1d1850a14145e9660ce169eca8d0-15b35dee-bb6596a5',
+// 	key: '',
 // });
 mg.messages
   .create(sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org, {
@@ -86,4 +86,4 @@ mg.messages
 // You can see a record of this email in your logs: https://app.mailgun.com/app/logs.
 
 // You can send up to 300 emails/day from this sandbox server.
-// Next, you should add your own domain so you can send 10000 emails/month for free.
+// Next, you should add your own domain so you can send 10000 emails/
