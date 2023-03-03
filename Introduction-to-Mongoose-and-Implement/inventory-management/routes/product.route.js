@@ -33,6 +33,8 @@ router
 router
   .route("/:id")
   .patch(productController.updateProductById)
-  .delete(productController.deleteProductById);
+  .delete(authorization("admin"), productController.deleteProductById);
 
 module.exports = router;
+
+// false is good but not everytime
