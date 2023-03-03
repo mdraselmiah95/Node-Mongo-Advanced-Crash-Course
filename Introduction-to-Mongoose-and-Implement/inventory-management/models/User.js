@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
 
 const bcrypt = require("bcryptjs");
 
@@ -98,6 +98,11 @@ userSchema.pre("save", function (next) {
 
   next();
 });
+
+userSchema.methods.comparePassword = function (password, hash) {
+  const isPasswordValid = bcrypt.compareSync(password, hash);
+  return isPasswordValid;
+};
 
 const User = mongoose.model("User", userSchema);
 

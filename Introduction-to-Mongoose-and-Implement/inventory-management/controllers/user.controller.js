@@ -1,4 +1,5 @@
 const { signupService, findUserByEmail } = require("../services/user.service");
+const bcrypt = require('bcryptjs')
 
 exports.signup = async (req, res) => {
   try {
@@ -47,10 +48,8 @@ exports.login = async (req, res) => {
       });
     }
 
-    res.status(200).json({
-      status: "success",
-      message: "Successfully signed up",
-    });
+    const 
+  
   } catch (error) {
     res.status(500).json({
       status: "fail",
