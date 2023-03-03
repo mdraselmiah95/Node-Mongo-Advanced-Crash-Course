@@ -18,7 +18,7 @@ module.exports.sendMailWithGmail = async (data) => {
       type: "OAuth2",
       user: process.env.SENDER_MAIL,
       clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
+      // clientSecret: process.env.CLIENT_SECRET,
       refreshToken: process.env.REFRESH_TOKEN,
       accessToken: accessToken,
     },
