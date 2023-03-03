@@ -1,5 +1,6 @@
 const { signupService, findUserByEmail } = require("../services/user.service");
-const bcrypt = require('bcryptjs')
+const bcrypt = require("bcryptjs");
+const { generateToken } = require("../utils/token");
 
 exports.signup = async (req, res) => {
   try {
@@ -48,8 +49,31 @@ exports.login = async (req, res) => {
       });
     }
 
-    const 
-  
+    const isPasswordValid = user.comparePassword(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(403).json({
+        status: "Fail",
+        error: "Password is not Correct",
+      });
+    }
+
+    if (user.status !== "active") {
+      return res.status(401).json({
+        status: "Fail",
+        error: "Your account is not active yet",
+      });
+    }
+
+    const token = generateToken(user);
+    res.status(200).json({
+      status: "success",
+      message: "Successfully Logged in",
+      data: {
+        user,
+        token,
+      },
+    });
   } catch (error) {
     res.status(500).json({
       status: "fail",
