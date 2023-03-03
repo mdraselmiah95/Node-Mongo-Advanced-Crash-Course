@@ -1,4 +1,8 @@
-const { signupService, findUserByEmail } = require("../services/user.service");
+const {
+  signupService,
+  findUserByEmail,
+  findUserByToken,
+} = require("../services/user.service");
 const { sendMailWithMailGun } = require("../utils/email");
 const { generateToken } = require("../utils/token");
 
@@ -6,10 +10,16 @@ exports.signup = async (req, res) => {
   try {
     const user = await signupService(req.body);
 
+    const token = user.generateConfirmationToken();
+
+    await user.save({ validateBeforeSave: false });
+
     const mailData = {
       to: [user.email],
       subject: "Verify Your Account 🌲",
-      text: "Thank You 🤟",
+      text: `Thank you for creating your account. Please confirm your account here: ${
+        req.protocol
+      }://${req.get("host")}${req.originalUrl}/confirmation/${token}`,
     };
 
     sendMailWithMailGun(mailData);
@@ -101,6 +111,46 @@ exports.getMe = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      error,
+    });
+  }
+};
+
+exports.confirmEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const user = await findUserByToken(token);
+
+    if (!user) {
+      return res.status(403).json({
+        status: "fail",
+        error: "Invalid token",
+      });
+    }
+
+    const expired = new Date() > new Date(user.confirmationTokenExpires);
+
+    if (expired) {
+      return res.status(401).json({
+        status: "fail",
+        error: "Token expired",
+      });
+    }
+
+    user.status = "active";
+    user.confirmationToken = undefined;
+    user.confirmationTokenExpires = undefined;
+
+    user.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully activated your account.",
     });
   } catch (error) {
     res.status(500).json({
