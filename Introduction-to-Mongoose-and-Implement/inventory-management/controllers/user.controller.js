@@ -84,3 +84,13 @@ exports.login = async (req, res) => {
     });
   }
 };
+
+exports.getMe = async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      error,
+    });
+  }
+};
