@@ -54,9 +54,9 @@ const mg = mailgun.client({
 
 module.exports.sendMailWithMailGun = async (data) => {
   const result = await mg.messages.create(
-    "sandboxf3104014604b45b09c95dd762669be2b.mailgun.org",
+    "sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org",
     {
-      from: "Mailgun Sandbox <postmaster@sandboxf3104014604b45b09c95dd762669be2b.mailgun.org>",
+      from: "Mailgun Sandbox <postmaster@sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org>",
       to: data.to,
       subject: data.subject,
       text: data.text,
@@ -73,17 +73,12 @@ module.exports.sendMailWithMailGun = async (data) => {
 // 	username: 'api',
 // 	key: '',
 // });
-mg.messages
-  .create(sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org, {
-    from: "Mailgun Sandbox <postmaster@sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org>",
-    to: ["russelroy15@gmail.com"],
-    subject: "Hello",
-    text: "Testing some Mailgun awesomness!",
-  })
-  .then((msg) => console.log(msg)) // logs response data
-  .catch((err) => console.log(err)); // logs any error`;
-
-// You can see a record of this email in your logs: https://app.mailgun.com/app/logs.
-
-// You can send up to 300 emails/day from this sandbox server.
-// Next, you should add your own domain so you can send 10000 emails/
+// mg.messages
+//   .create(sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org, {
+//     from: "Mailgun Sandbox <postmaster@sandbox30f35b92d0c248b1b5743ccbb01fd66c.mailgun.org>",
+//     to: ["russelroy15@gmail.com"],
+//     subject: "Hello",
+//     text: "Testing some Mailgun awesomness!",
+//   })
+//   .then((msg) => console.log(msg)) // logs response data
+//   .catch((err) => console.log(err)); // logs any error`;
