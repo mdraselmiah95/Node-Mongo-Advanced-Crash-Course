@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
       process.env.TOKEN_SECRET
     );
 
-    // const user = User.findOne({ email: decoded.email })
+    //* const user = User.findOne({ email: decoded.email })
 
     req.user = decoded;
 

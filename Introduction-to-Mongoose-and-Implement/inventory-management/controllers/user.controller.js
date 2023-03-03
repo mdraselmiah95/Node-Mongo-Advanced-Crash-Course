@@ -87,7 +87,12 @@ exports.login = async (req, res) => {
 
 exports.getMe = async (req, res) => {
   try {
-    res.json(req.user);
+    const user = await findUserByEmail(req.user?.email);
+
+    res.status(200).json({
+      status: "success",
+      data: user,
+    });
   } catch (error) {
     res.status(500).json({
       status: "fail",
